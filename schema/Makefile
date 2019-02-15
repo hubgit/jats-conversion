@@ -15,7 +15,7 @@ $(DOWNLOADS):
 
 # JATS DTD
 
-jats: | jats/publishing/1.0 jats/publishing/1.1
+jats: | jats/publishing/1.0 jats/publishing/1.1 jats/archiving/1.2
 
 # JATS 1.0
 
@@ -46,6 +46,22 @@ $(DOWNLOADS)/JATS-Publishing-1-1-MathML2-DTD.zip: | $(DOWNLOADS)
 
 $(DOWNLOADS)/JATS-Publishing-1-1-MathML2-XSD.zip: | $(DOWNLOADS)
 	wget -c -P $(DOWNLOADS) ftp://ftp.ncbi.nih.gov/pub/jats/publishing/1.1/xsd/JATS-Publishing-1-1-MathML2-XSD.zip
+
+# JATS 1.2
+# there are 4 versions of this DTD, with MathML 2 or 3 and XHTML ± CALS tables
+# need to unzip as there are subfolders
+jats/archiving/1.2: | $(DOWNLOADS)/JATS-Archiving-1-2d2-OASIS-MathML3-DTD.zip $(DOWNLOADS)/JATS-Archiving-1-2d2-OASIS-MathML3-XSD.zip
+	unzip $(DOWNLOADS)/JATS-Archiving-1-2d2-OASIS-MathML3-DTD.zip -d $(DOWNLOADS)
+	mv $(DOWNLOADS)/JATS-Archiving-1-2d2-OASIS-MathML3-DTD/ jats/archiving/1.2
+
+	unzip $(DOWNLOADS)/JATS-Archiving-1-2d2-OASIS-MathML3-XSD.zip -d $(DOWNLOADS)
+	mv $(DOWNLOADS)/JATS-Archiving-1-2d2-OASIS-MathML3-XSD jats/archiving/1.2/xsd
+
+$(DOWNLOADS)/JATS-Archiving-1-2d2-OASIS-MathML3-DTD.zip: | $(DOWNLOADS)
+	wget -c -P $(DOWNLOADS) ftp://ftp.ncbi.nih.gov/pub/jats/archiving/1.2d2/JATS-Archiving-1-2d2-OASIS-MathML3-DTD.zip
+
+$(DOWNLOADS)/JATS-Archiving-1-2d2-OASIS-MathML3-XSD.zip: | $(DOWNLOADS)
+	wget -c -P $(DOWNLOADS) ftp://ftp.ncbi.nih.gov/pub/jats/archiving/1.2d2/xsd/JATS-Archiving-1-2d2-OASIS-MathML3-XSD.zip
 
 # CrossRef Schema
 
